@@ -1,8 +1,8 @@
 import java.util.*;
 import java.io.*;
-# failed
+
 public class _1_2MaxPairwiseProduct {
-    static long getMaxPairwiseProduct(int[] numbers) {
+    static long getMaxPairwiseProductNaive(int[] numbers) {
         long max_product = 0;
         int n = numbers.length;
 
@@ -13,8 +13,22 @@ public class _1_2MaxPairwiseProduct {
                 max_product = Math.max(max_product, product);
             }
         }
-
         return max_product;
+    }
+
+    static long getMaxPairwiseProduct(int[] numbers) {
+        long largest = Long.MIN_VALUE;
+        long secondLargest = Long.MIN_VALUE;
+        int n = numbers.length;
+        for (int i = 0; i < n; i++) {
+            if (numbers[i] > largest) {
+                secondLargest = largest;
+                largest = numbers[i];
+            } else if (numbers[i] > secondLargest) {
+                secondLargest = numbers[i];
+            }
+        }
+        return largest * secondLargest;
     }
 
     public static void main(String[] args) {
